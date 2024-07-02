@@ -689,7 +689,12 @@ static CGFloat itemMargin = 5;
                 [strongSelf refreshBottomToolBarStatus];
                 [UIView showOscillatoryAnimationWithLayer:strongLayer type:TZOscillatoryAnimationToSmaller];
             } else {
-                NSString *title = [NSString stringWithFormat:[NSBundle tz_localizedStringForKey:@"Select a maximum of %zd photos"], tzImagePickerVc.maxImagesCount];
+				NSString *title;
+				if (tzImagePickerVc.pickerDelegate && [tzImagePickerVc.pickerDelegate respondsToSelector:@selector(localizedStrFromSource:)]) {
+					title = [tzImagePickerVc.pickerDelegate localizedStrFromSource:@"A03_01_L100"];
+				} else {
+					title = [NSString stringWithFormat:[NSBundle tz_localizedStringForKey:@"Select a maximum of %zd photos"], tzImagePickerVc.maxImagesCount];
+				}
                 [tzImagePickerVc showAlertWithTitle:title];
             }
         }

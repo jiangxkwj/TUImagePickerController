@@ -348,6 +348,9 @@
 // Decide asset can be selected
 // 决定照片能否被选中
 - (BOOL)isAssetCanBeSelected:(PHAsset *)asset;
+///	获取国际化字符串
+- (NSString *)localizedStrFromSource:(NSString *)sourceStr;
+
 @end
 
 
