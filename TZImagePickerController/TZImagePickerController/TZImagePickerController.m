@@ -373,13 +373,23 @@
 }
 
 - (void)configDefaultBtnTitle {
-    self.doneBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Done"];
-    self.cancelBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Cancel"];
-    self.previewBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Preview"];
-    self.fullImageBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Full image"];
-    self.settingBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Setting"];
-    self.processHintStr = [NSBundle tz_localizedStringForKey:@"Processing..."];
-    self.editBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Edit"];
+	if (self.localizedStrFromSourceBlock) {
+		self.doneBtnTitleStr = self.localizedStrFromSourceBlock(@"A01_03_B006");
+		self.cancelBtnTitleStr = self.localizedStrFromSourceBlock(@"A01_05_L004");
+		self.previewBtnTitleStr = self.localizedStrFromSourceBlock(@"A04_03_126");
+		self.fullImageBtnTitleStr = self.localizedStrFromSourceBlock(@"FE_A_0000000380");
+		self.settingBtnTitleStr = self.localizedStrFromSourceBlock(@"A04_03_L116");
+		self.processHintStr = self.localizedStrFromSourceBlock(@"G01_01_L230");
+		self.editBtnTitleStr = self.localizedStrFromSourceBlock(@"A03_02_L025");
+	} else {
+		self.doneBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Done"];
+		self.cancelBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Cancel"];
+		self.previewBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Preview"];
+		self.fullImageBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Full image"];
+		self.settingBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Setting"];
+		self.processHintStr = [NSBundle tz_localizedStringForKey:@"Processing..."];
+		self.editBtnTitleStr = [NSBundle tz_localizedStringForKey:@"Edit"];
+	}
 }
 
 - (void)setShowSelectedIndex:(BOOL)showSelectedIndex {
@@ -800,7 +810,13 @@
     }
     
     if (self.isFirstAppear && !imagePickerVc.navLeftBarButtonSettingBlock) {
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[NSBundle tz_localizedStringForKey:@"Back"] style:UIBarButtonItemStylePlain target:nil action:nil];
+		NSString *title;
+		if (imagePickerVc.localizedStrFromSourceBlock) {
+			title = imagePickerVc.localizedStrFromSourceBlock(@"A03_05_L058");
+		} else {
+			title = [NSBundle tz_localizedStringForKey:@"Back"];
+		}
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:nil action:nil];
     }
     
     [self configTableView];
