@@ -27,7 +27,7 @@
     vc.view.backgroundColor = [UIColor whiteColor];
 
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(20, 200, 300, 44)];
-    [btn setTitle:@"pushTZImagePickerController" forState:UIControlStateNormal];
+    [btn setTitle:@"pushTZImagePickerController1" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(pushTZImagePickerController) forControlEvents:UIControlEventTouchUpInside];
     [vc.view addSubview:btn];
