@@ -177,6 +177,10 @@
     return [self initWithMaxImagesCount:maxImagesCount columnNumber:columnNumber delegate:delegate pushPhotoPickerVc:YES sourceBlock:nil];
 }
 
+- (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount columnNumber:(NSInteger)columnNumber delegate:(id<TZImagePickerControllerDelegate>)delegate pushPhotoPickerVc:(BOOL)pushPhotoPickerVc {
+	return [self initWithMaxImagesCount:maxImagesCount columnNumber:columnNumber delegate:delegate pushPhotoPickerVc:pushPhotoPickerVc sourceBlock:nil];
+}
+
 - (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount columnNumber:(NSInteger)columnNumber delegate:(id<TZImagePickerControllerDelegate>)delegate pushPhotoPickerVc:(BOOL)pushPhotoPickerVc sourceBlock:(NSString *(^)(NSString *source))block {
     _pushPhotoPickerVc = pushPhotoPickerVc;
     TZAlbumPickerController *albumPickerVc = [[TZAlbumPickerController alloc] init];
