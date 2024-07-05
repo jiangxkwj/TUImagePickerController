@@ -696,8 +696,8 @@ static CGFloat itemMargin = 5;
                 [UIView showOscillatoryAnimationWithLayer:strongLayer type:TZOscillatoryAnimationToSmaller];
             } else {
 				NSString *title;
-				if (tzImagePickerVc.pickerDelegate && [tzImagePickerVc.pickerDelegate respondsToSelector:@selector(localizedStrFromSource:)]) {
-					title = [tzImagePickerVc.pickerDelegate localizedStrFromSource:@"A03_01_L100"];
+				if (tzImagePickerVc.localizedStrFromSourceBlock) {
+					title = tzImagePickerVc.localizedStrFromSourceBlock(@"A03_01_L100");
 				} else {
 					title = [NSString stringWithFormat:[NSBundle tz_localizedStringForKey:@"Select a maximum of %zd photos"], tzImagePickerVc.maxImagesCount];
 				}
