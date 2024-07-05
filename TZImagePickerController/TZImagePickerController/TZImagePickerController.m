@@ -165,15 +165,19 @@
     return self.statusBarStyle;
 }
 
+- (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount sourceBlock:(NSString *(^)(NSString *source))block {
+	return [self initWithMaxImagesCount:maxImagesCount columnNumber:4 delegate:nil pushPhotoPickerVc:YES sourceBlock:block];
+}
+
 - (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount delegate:(id<TZImagePickerControllerDelegate>)delegate {
-    return [self initWithMaxImagesCount:maxImagesCount columnNumber:4 delegate:delegate pushPhotoPickerVc:YES];
+    return [self initWithMaxImagesCount:maxImagesCount columnNumber:4 delegate:delegate pushPhotoPickerVc:YES sourceBlock:nil];
 }
 
 - (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount columnNumber:(NSInteger)columnNumber delegate:(id<TZImagePickerControllerDelegate>)delegate {
-    return [self initWithMaxImagesCount:maxImagesCount columnNumber:columnNumber delegate:delegate pushPhotoPickerVc:YES];
+    return [self initWithMaxImagesCount:maxImagesCount columnNumber:columnNumber delegate:delegate pushPhotoPickerVc:YES sourceBlock:nil];
 }
 
-- (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount columnNumber:(NSInteger)columnNumber delegate:(id<TZImagePickerControllerDelegate>)delegate pushPhotoPickerVc:(BOOL)pushPhotoPickerVc {
+- (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount columnNumber:(NSInteger)columnNumber delegate:(id<TZImagePickerControllerDelegate>)delegate pushPhotoPickerVc:(BOOL)pushPhotoPickerVc sourceBlock:(NSString *(^)(NSString *source))block {
     _pushPhotoPickerVc = pushPhotoPickerVc;
     TZAlbumPickerController *albumPickerVc = [[TZAlbumPickerController alloc] init];
     albumPickerVc.isFirstAppear = YES;
@@ -182,6 +186,7 @@
     if (self) {
         self.maxImagesCount = maxImagesCount > 0 ? maxImagesCount : 9; // Default is 9 / 默认最大可选9张图片
         self.pickerDelegate = delegate;
+		self.localizedStrFromSourceBlock = block;
         self.selectedAssets = [NSMutableArray array];
         
         // Allow user picking original photo and video, you also can set No after this method
